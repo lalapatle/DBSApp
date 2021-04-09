@@ -5,12 +5,12 @@ const EMPLOYEE_API_BASE_URL = "http://localhost:8080/dbsoApp/";
 class EmployeeService {
   createEmployee(cgGroupId, personal) {
     return axios.post(
-      "http://localhost:8080/dbsoApp/add-associate-professional/" + cgGroupId,
+      EMPLOYEE_API_BASE_URL + "add-associate-professional/" + cgGroupId,
       personal
     );
   }
   getAll() {
-    return axios.get("http://localhost:8080/dbsoApp/get-professional-details");
+    return axios.get(EMPLOYEE_API_BASE_URL + "get-professional-details");
   }
 
   getById(sno) {
@@ -23,8 +23,8 @@ class EmployeeService {
       personal
     );
   }
-  getReport(){
-    return axios.get(EMPLOYEE_API_BASE_URL+"generateReport");
+  getReport() {
+    return axios.get(EMPLOYEE_API_BASE_URL + "generateReport");
   }
 }
 

@@ -32,7 +32,6 @@ class AddEmploee extends Component {
     this.changePoNumbersHandler = this.changePoNumbersHandler.bind(this);
     this.changeCommentsHandler = this.changeCommentsHandler.bind(this);
     this.changeCgGroupIdHandler = this.changeCgGroupIdHandler.bind(this);
-    // this.savePersonal = this.savePersonal.bind(this);
     this.saveProfessional = this.saveProfessional.bind(this);
   }
 
@@ -56,8 +55,7 @@ class AddEmploee extends Component {
     console.log("personal => " + JSON.stringify(personal));
     EmployeeService.createEmployee(this.state.cgGroupId, personal).then(
       (res) => {
-        //    let employee2=res.data;
-        alert("Form submitted");
+        alert("Details Added Successfully. :)");
         this.props.history.push("/employee");
       }
     );
@@ -249,11 +247,10 @@ class AddEmploee extends Component {
                     />
                   </div>
 
-                  <button className="btn btn-success">Save</button>
+                  <button className="btn btn-info formbtn">Save</button>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger formbtn"
                     onClick={this.cancel.bind(this)}
-                    style={{ marginLeft: "10px" }}
                   >
                     Cancel
                   </button>

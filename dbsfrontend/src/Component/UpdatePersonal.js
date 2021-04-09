@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PersonalService from "../Services/PersonalService";
+import "../App.css";
 class UpdatePersonal extends Component {
   constructor(props) {
     super(props);
@@ -953,13 +954,15 @@ class UpdatePersonal extends Component {
                       onChange={this.changeSpocHandler}
                     />
                   </div>
-                  <button className="btn btn-success" onClick={this.update}>
+                  <button
+                    className="btn btn-info formbtn"
+                    onClick={this.update}
+                  >
                     Save
                   </button>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger formbtn"
                     onClick={this.cancel.bind(this)}
-                    style={{ marginLeft: "10px" }}
                   >
                     Cancel
                   </button>

@@ -115,7 +115,6 @@ class AddPersonal extends Component {
       this
     );
     this.changeSpocHandler = this.changeSpocHandler.bind(this);
-    // this.saveEmployee = this.saveEmployee.bind(this);
     this.AddPersonalDetails = this.AddPersonalDetails.bind(this);
   }
 
@@ -167,58 +166,11 @@ class AddPersonal extends Component {
 
     console.log("emp Personal details => " + JSON.stringify(associatePersonal));
     PersonalService.createPersonal(associatePersonal).then((res) => {
-      alert("Employee Personal Details Added");
+      alert("Employee Personal Details Added Successfully");
       this.props.history.push(`/personalinfo`);
     });
   };
-  //   saveEmployee = (e) => {
-  //     e.preventDefault();
 
-  //     let empPersonal = {
-  //       cgGroupId: this.state.cgGroupId,
-  //       associateFullName: this.state.associateFullName,
-  //       gender: this.state.gender,
-  //       cgUserName: this.state.cgUserName,
-  //       cgMailId: this.state.cgMailId,
-  //       region: this.state.region,
-  //       practice: this.state.practice,
-  //       designation: this.state.designation,
-  //       cgSupervisor: this.state.cgSupervisor,
-  //       cgDBSAccountSupervisor: this.state.cgDBSAccountSupervisor,
-  //       dbsClientLead: this.state.dbsClientLead,
-  //       tower: this.state.tower,
-  //       shortTower: this.state.shortTower,
-  //       reasonResignation: this.state.reasonResignation,
-  //       associateLocation: this.state.associateLocation,
-  //       dateOfJoiningDBSAccount: this.state.dateOfJoiningDBSAccount,
-  //       dbsBillableStartDate: this.state.dbsBillableStartDate,
-  //       bankId: this.state.bankId,
-  //       dbsMailId: this.state.dbsMailId,
-  //       primarySkill: this.state.primarySkill,
-  //       overallExperienceBeforeJoiningCg: this.state
-  //         .overallExperienceBeforeJoiningCg,
-  //       sowNumber: this.state.sowNumber,
-  //       mandatoryTraining: this.state.mandatoryTraining,
-  //       onboardingDocs: this.state.onboardingDocs,
-  //       panCard: this.state.panCard,
-  //       passport: this.state.passport,
-  //       passportExpiryDate: this.state.passportExpiryDate,
-  //       dateOfBirth: this.state.dateOfBirth,
-  //       foreignEmploymentExperience: this.state.foreignEmploymentExperience,
-  //       csbForm: this.state.csbForm,
-  //       contact: this.state.contact,
-  //       emergencyContact: this.state.emergencyContact,
-  //       temporaryAddress: this.state.temporaryAddress,
-  //       permanentAddress: this.state.permanentAddress,
-  //       cgLaptopSlno: this.state.cgLaptopSlno,
-  //       dbsLaptopSlno: this.state.dbsLaptopSlno,
-  //       dateOfLaptopTaken: this.state.dateOfLaptopTaken,
-  //       dateOfLaptopReturn: this.state.dateOfLaptopReturn,
-  //       spoc: this.state.spoc,
-  //     };
-
-  //     console.log("emp Personal details => " + JSON.stringify(empPersonal));
-  //   };
   changeCgGroupIdHandler = (event) => {
     this.setState({ cgGroupId: event.target.value });
   };
@@ -951,16 +903,10 @@ class AddPersonal extends Component {
                     />
                   </div>
 
+                  <button className="btn btn-info formbtn">Save</button>
                   <button
-                    className="btn btn-success"
-                    // onClick={this.saveEmployee}
-                  >
-                    Save
-                  </button>
-                  <button
-                    className="btn btn-danger"
+                    className="btn btn-danger formbtn"
                     onClick={this.cancel.bind(this)}
-                    style={{ marginLeft: "10px" }}
                   >
                     Cancel
                   </button>

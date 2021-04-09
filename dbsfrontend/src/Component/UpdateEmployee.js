@@ -17,7 +17,7 @@ class UpdateEmployee extends Component {
       comments: "",
       cgGroupId: "",
     };
-    // this.changeSNoHandler=this.changeSNoHandler.bind(this);
+
     this.changeResourceStatusHandler = this.changeResourceStatusHandler.bind(
       this
     );
@@ -39,7 +39,6 @@ class UpdateEmployee extends Component {
     EmployeeService.getById(this.state.sno).then((res) => {
       let emp = res.data;
       this.setState({
-        //sNo:emp.sNo,
         resourceStatus: emp.resourceStatus,
         billability: emp.billability,
         currency: emp.currency,
@@ -60,7 +59,6 @@ class UpdateEmployee extends Component {
     e.preventDefault();
 
     let emp = {
-      //sNo:this.state.sNo,
       resourceStatus: this.state.resourceStatus,
       billability: this.state.billability,
       currency: this.state.currency,
@@ -82,10 +80,6 @@ class UpdateEmployee extends Component {
     alert("changed successfully");
   };
 
-  /* changeSNoHandler= (event) =>{
-        this.setState({sNo: event.target.value});
-    }
-*/
   changeResourceStatusHandler = (event) => {
     this.setState({ resourceStatus: event.target.value });
   };
@@ -140,11 +134,6 @@ class UpdateEmployee extends Component {
               <h2 className="text-center">Associate Proffesional</h2>
               <div className="card-body">
                 <form>
-                  {/* <div className="form-group">
-                                    <label>Sno: </label>
-                                    <input type="number" name="sNo" className="form-control"
-                                    value={this.state.sNo}></input>
-                        </div>*/}
                   <div className="form-group">
                     <label for="resourceState">Resource State: </label>
                     <select
@@ -276,13 +265,15 @@ class UpdateEmployee extends Component {
                     />
                   </div>
 
-                  <button className="btn btn-success" onClick={this.update}>
+                  <button
+                    className="btn btn-info formbtn"
+                    onClick={this.update}
+                  >
                     Save
                   </button>
                   <button
-                    className="btn btn-danger"
+                    className="btn btn-danger formbtn"
                     onClick={this.cancel.bind(this)}
-                    style={{ marginLeft: "10px" }}
                   >
                     Cancel
                   </button>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PersonalService from "../Services/PersonalService";
+import "../App.css";
 class Personalinfo extends Component {
   constructor(props) {
     super(props);
@@ -30,21 +31,26 @@ class Personalinfo extends Component {
 
   render() {
     return (
-      <div>
-        <h2 className="text-center">AssociateDetails</h2>
+      <div className="container">
+        <h2 className="text-center headingtitle">AssociateDetails</h2>
         <div className="row">
           <button id="margin" onClick={this.addPersonal} class="button">
             Add
           </button>
-          <button id="margin" onClick={() => this.changeback()} class="button">
+          <button
+            id="margin"
+            style={{ marginLeft: "20px" }}
+            onClick={() => this.changeback()}
+            class="button"
+          >
             Back
           </button>
         </div>
         <br></br>
         <div className="row">
-          <table className="table table-bordered">
-            <thead>
-              <tr class="table-success">
+          <table class="table table-striped table-bordered table-hover table-md table-responsive">
+            <thead className="thead-dark" style={{ whiteSpace: "nowrap" }}>
+              <tr class="table-success text-center">
                 <th>CG Group ID</th>
                 <th>AssociateFullName</th>
                 <th>Gender</th>
@@ -89,10 +95,10 @@ class Personalinfo extends Component {
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="table-info text-center">
               {this.state.employee.map((employe) => (
                 <tr key={employe.cgGroupId}>
-                  <td>{employe.cgGroupId}</td>
+                  <th scope="row">{employe.cgGroupId}</th>
                   <td>{employe.associateFullName}</td>
                   <td>{employe.gender}</td>
                   <td>{employe.cgUserName}</td>
