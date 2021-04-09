@@ -11,6 +11,13 @@ class Employeee extends Component {
     this.addEmployee = this.addEmployee.bind(this);
     this.editEmployee = this.editEmployee.bind(this);
     this.changeback = this.changeback.bind(this);
+    this.generateReport=this.generateReport.bind(this);
+  }
+  generateReport(){
+    EmployeeService.getReport().then(res=>{
+      
+      alert("Report Genrate");
+    });
   }
   componentDidMount() {
     EmployeeService.getAll().then((response) => {
@@ -109,6 +116,9 @@ class Employeee extends Component {
             </tbody>
           </table>
         </div>
+        <button class="button" >
+        <a href="http://localhost:8080/dbsoApp/generateReport">Generate Report</a>
+        </button>
       </div>
     );
   }
