@@ -1,24 +1,23 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Personalinfo from "./Component/Personalinfo";
 import Employeee from "./Component/Employeee";
 import Home from "./Component/Home";
 import UpdatePersonal from "./Component/UpdatePersonal";
 import AddPersonal from "./Component/AddPersonal";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  NavLink,
-} from "react-router-dom";
+import "./Component/Home.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ViewPersonal from "./Component/ViewPersonal";
 import ViewEmployee from "./Component/ViewEmployee";
 import AddEmploee from "./Component/AddEmploee";
 import UpdateEmployee from "./Component/UpdateEmployee";
+import Header from "./Component/Header";
+import Footer from "./Component/Footer";
+
 function App() {
   return (
-    <div className="container">
-      <Router>
+    <Router>
+      <>
+        <Header />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/personalinfo" component={Personalinfo} />
@@ -30,8 +29,9 @@ function App() {
           <Route path="/add-emp/:cgGroupId" component={AddEmploee} />
           <Route path="/update-emp/:sNo" component={UpdateEmployee} />
         </Switch>
-      </Router>
-    </div>
+        <Footer />
+      </>
+    </Router>
   );
 }
 
