@@ -23,6 +23,9 @@ class EmployeeService {
       personal
     );
   }
+  getReport(){
+    return axios.get(EMPLOYEE_API_BASE_URL+"generateReport");
+  }
 }
 
 export default new EmployeeService();
