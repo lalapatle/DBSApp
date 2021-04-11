@@ -12,6 +12,7 @@ import AddEmploee from "./Component/AddEmploee";
 import UpdateEmployee from "./Component/UpdateEmployee";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
+import SuperAdmin from "./Component/SuperAdmin";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/superAdmin" component={SuperAdmin} />
           <Route path="/personalinfo" component={Personalinfo} />
           <Route path="/employee" component={Employeee} />
           <Route path="/add-employee" component={AddPersonal} />

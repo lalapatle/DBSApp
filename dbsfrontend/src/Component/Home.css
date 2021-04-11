@@ -1,12 +1,18 @@
-img {
+img.image {
   width: 250px;
 }
 .image {
   border: 8px groove #90e0ef;
 }
 
+img.image-dbs {
+  width: 210px;
+  height: 133px;
+  border: 8px groove #90e0ef;
+  margin-left: -30px;
+}
 .title {
-  margin-left: -10px;
+  margin-left: 30px;
   margin-top: 45px;
   color: white;
   font-weight: 600;

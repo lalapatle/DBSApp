@@ -26,6 +26,10 @@ class EmployeeService {
   getReport() {
     return axios.get(EMPLOYEE_API_BASE_URL + "generateReport");
   }
+
+  deleteAssociate(sno){
+    return axios.delete(EMPLOYEE_API_BASE_URL+"deleteAssociate/"+sno);
+  }
 }
 
 export default new EmployeeService();

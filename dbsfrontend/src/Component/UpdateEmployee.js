@@ -15,7 +15,6 @@ class UpdateEmployee extends Component {
       sowEnd: "",
       poNumbers: "",
       comments: "",
-      cgGroupId: "",
     };
 
     this.changeResourceStatusHandler = this.changeResourceStatusHandler.bind(
@@ -31,7 +30,6 @@ class UpdateEmployee extends Component {
     this.changeSowEndHandler = this.changeSowEndHandler.bind(this);
     this.changepoNumbersHandler = this.changepoNumbersHandler.bind(this);
     this.changeCommentsHandler = this.changeCommentsHandler.bind(this);
-    this.changeCgGroupIdHandler = this.changeCgGroupIdHandler.bind(this);
     this.update = this.update.bind(this);
   }
 
@@ -50,7 +48,6 @@ class UpdateEmployee extends Component {
         sowEnd: emp.sowEnd,
         poNumbers: emp.poNumbers,
         comments: emp.comments,
-        cgGroupId: emp.cgGroupId,
       });
     });
   }
@@ -70,7 +67,6 @@ class UpdateEmployee extends Component {
       sowEnd: this.state.sowEnd,
       poNumbers: this.state.poNumbers,
       comments: this.state.comments,
-      cgGroupId: this.state.cgGroupId,
     };
     console.log("emp => " + JSON.stringify(emp));
     console.log("sNo => " + JSON.stringify(this.state.sno));
@@ -116,9 +112,6 @@ class UpdateEmployee extends Component {
   };
   changeCommentsHandler = (event) => {
     this.setState({ comments: event.target.value });
-  };
-  changeCgGroupIdHandler = (event) => {
-    this.setState({ cgGroupId: event.target.value });
   };
 
   cancel() {
@@ -254,17 +247,6 @@ class UpdateEmployee extends Component {
                       onChange={this.changeCommentsHandler}
                     />
                   </div>
-                  <div className="form-group">
-                    <label>CG Group Id: </label>
-                    <input
-                      type="text"
-                      name="cgGroupId"
-                      className="form-control"
-                      value={this.state.cgGroupId}
-                      onChange={this.changeCgGroupIdHandler}
-                    />
-                  </div>
-
                   <button
                     className="btn btn-info formbtn"
                     onClick={this.update}
