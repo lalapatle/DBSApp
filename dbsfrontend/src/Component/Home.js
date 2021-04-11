@@ -9,8 +9,9 @@ class Home extends Component {
             <div class="dropdown">
               <button class="dropbtn">Select option</button>
               <div class="dropdown-content">
-                <a href="/personalinfo">Associate</a>
-                <a href="/employee">Operation Team</a>
+              <a href="/superAdmin">Super Admin</a>
+              <a href="/employee">Operation Team</a>
+              <a href="/personalinfo">Associate</a>
               </div>
             </div>
           </div>
