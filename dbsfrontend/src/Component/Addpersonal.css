@@ -1,0 +1,9 @@
+input.error {
+  border: 1px solid #eadae4;
+}
+
+.error {
+  color: #db2269;
+  font-size: 0.9em;
+  display: relative;
+}

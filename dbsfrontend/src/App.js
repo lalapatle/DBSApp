@@ -13,6 +13,9 @@ import UpdateEmployee from "./Component/UpdateEmployee";
 import Header from "./Component/Header";
 import Footer from "./Component/Footer";
 import SuperAdmin from "./Component/SuperAdmin";
+import ViewSuperAdmin from "./Component/ViewSuperAdmin";
+import UpdateSuperAdmin from "./Component/UpdateSuperAdmin";
+import AddSuperAdmin from "./Component/AddSuperAdmin";
 
 function App() {
   return (
@@ -25,11 +28,14 @@ function App() {
           <Route path="/personalinfo" component={Personalinfo} />
           <Route path="/employee" component={Employeee} />
           <Route path="/add-employee" component={AddPersonal} />
+          <Route path="/add-superadmin" component={AddSuperAdmin} />
           <Route path="/update/:cgGroupId" component={UpdatePersonal} />
           <Route path="/view/:cgGroupId" component={ViewPersonal} />
           <Route path="/view-emp/:sNo" component={ViewEmployee} />
+          <Route path="/view-superadmin/:sNo" component={ViewSuperAdmin} />
           <Route path="/add-emp/:cgGroupId" component={AddEmploee} />
           <Route path="/update-emp/:sNo" component={UpdateEmployee} />
+          <Route path="/update-superadmin/:sNo" component={UpdateSuperAdmin} />
         </Switch>
         <Footer />
       </>

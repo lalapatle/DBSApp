@@ -25,13 +25,13 @@ class SuperAdmin extends Component {
     });
   }
   addEmployee() {
-    this.props.history.push(`/add-emp/${this.state.cgGroupId}`);
+    this.props.history.push(`/add-superadmin/${this.state.cgGroupId}`);
   }
   editEmployee(sno) {
-    this.props.history.push(`/update-emp/${sno}`);
+    this.props.history.push(`/update-superadmin/${sno}`);
   }
   viewEmployee(sno) {
-    this.props.history.push(`/view-emp/${sno}`);
+    this.props.history.push(`/view-superadmin/${sno}`);
   }
   changeback() {
     this.props.history.push(`/`);
@@ -44,13 +44,14 @@ class SuperAdmin extends Component {
             (employee)=> employee.sno !== sno
           ),
         });
+        alert('Deleted record successfully!');
       });
   }
 
   render() {
     return (
       <div className="container">
-        <h2 className="text-center headingtitle">Operation Team</h2>
+        <h2 className="text-center headingtitle">Super Admin</h2>
         <div className="row">
           <button id="margin" onClick={this.addEmployee} class="button">
             Add

@@ -1,5 +1,16 @@
 import React, { Component } from "react";
 import PersonalService from "../Services/PersonalService";
+import "../Component/Addpersonal.css";
+const validateForm = errors => {
+  let valid = true;
+  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+  return valid;
+};
+
+const validEmailRegex = RegExp(
+  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+);
+
 class AddPersonal extends Component {
   constructor(props) {
     super(props);
@@ -42,6 +53,15 @@ class AddPersonal extends Component {
       dateOfLaptopTaken: "",
       dateOfLaptopReturn: "",
       spoc: "",
+
+      errors: {
+        cgGroupId:'',
+        associateFullName: '',
+        cgMailId: '',
+        dbsMailId: '',
+        passport:'',
+        panCard:'',
+      }
     };
     this.changeCgGroupIdHandler = this.changeCgGroupIdHandler.bind(this);
     this.changeAssociateFullNameHandler = this.changeAssociateFullNameHandler.bind(
@@ -121,64 +141,82 @@ class AddPersonal extends Component {
   AddPersonalDetails = (e) => {
     e.preventDefault();
 
-    let associatePersonal = {
-      cgGroupId: this.state.cgGroupId,
-      associateFullName: this.state.associateFullName,
-      gender: this.state.gender,
-      cgUserName: this.state.cgUserName,
-      cgMailId: this.state.cgMailId,
-      region: this.state.region,
-      practice: this.state.practice,
-      designation: this.state.designation,
-      cgSupervisor: this.state.cgSupervisor,
-      cgDBSAccountSupervisor: this.state.cgDBSAccountSupervisor,
-      dbsClientLead: this.state.dbsClientLead,
-      tower: this.state.tower,
-      shortTower: this.state.shortTower,
-      reasonResignation: this.state.reasonResignation,
-      associateLocation: this.state.associateLocation,
-      dateOfJoiningDBSAccount: this.state.dateOfJoiningDBSAccount,
-      dbsBillableStartDate: this.state.dbsBillableStartDate,
-      bankId: this.state.bankId,
-      dbsMailId: this.state.dbsMailId,
-      primarySkill: this.state.primarySkill,
-      overallExperienceBeforeJoiningCg: this.state
-        .overallExperienceBeforeJoiningCg,
-      sowNumber: this.state.sowNumber,
-      mandatoryTraining: this.state.mandatoryTraining,
-      onboardingDocs: this.state.onboardingDocs,
-      panCard: this.state.panCard,
-      passport: this.state.passport,
-      passportExpiryDate: this.state.passportExpiryDate,
-      dateOfBirth: this.state.dateOfBirth,
-      foreignEmploymentExperience: this.state.foreignEmploymentExperience,
-      csbForm: this.state.csbForm,
-      contact: this.state.contact,
-      emergencyContact: this.state.emergencyContact,
-      temporaryAddress: this.state.temporaryAddress,
-      permanentAddress: this.state.permanentAddress,
-      cgLaptopSlno: this.state.cgLaptopSlno,
-      dbsLaptopSlno: this.state.dbsLaptopSlno,
-      dateOfLaptopTaken: this.state.dateOfLaptopTaken,
-      dateOfLaptopReturn: this.state.dateOfLaptopReturn,
-      spoc: this.state.spoc,
-    };
-
-    console.log("emp Personal details => " + JSON.stringify(associatePersonal));
-    PersonalService.createPersonal(associatePersonal).then((res) => {
-      alert("Employee Personal Details Added Successfully");
-      this.props.history.push(`/personalinfo`);
-    });
+   
+    if(validateForm(this.state.errors)) {
+      console.info('Valid Form');
+      let associatePersonal = {
+        cgGroupId: this.state.cgGroupId,
+        associateFullName: this.state.associateFullName,
+        gender: this.state.gender,
+        cgUserName: this.state.cgUserName,
+        cgMailId: this.state.cgMailId,
+        region: this.state.region,
+        practice: this.state.practice,
+        designation: this.state.designation,
+        cgSupervisor: this.state.cgSupervisor,
+        cgDBSAccountSupervisor: this.state.cgDBSAccountSupervisor,
+        dbsClientLead: this.state.dbsClientLead,
+        tower: this.state.tower,
+        shortTower: this.state.shortTower,
+        reasonResignation: this.state.reasonResignation,
+        associateLocation: this.state.associateLocation,
+        dateOfJoiningDBSAccount: this.state.dateOfJoiningDBSAccount,
+        dbsBillableStartDate: this.state.dbsBillableStartDate,
+        bankId: this.state.bankId,
+        dbsMailId: this.state.dbsMailId,
+        primarySkill: this.state.primarySkill,
+        overallExperienceBeforeJoiningCg: this.state
+          .overallExperienceBeforeJoiningCg,
+        sowNumber: this.state.sowNumber,
+        mandatoryTraining: this.state.mandatoryTraining,
+        onboardingDocs: this.state.onboardingDocs,
+        panCard: this.state.panCard,
+        passport: this.state.passport,
+        passportExpiryDate: this.state.passportExpiryDate,
+        dateOfBirth: this.state.dateOfBirth,
+        foreignEmploymentExperience: this.state.foreignEmploymentExperience,
+        csbForm: this.state.csbForm,
+        contact: this.state.contact,
+        emergencyContact: this.state.emergencyContact,
+        temporaryAddress: this.state.temporaryAddress,
+        permanentAddress: this.state.permanentAddress,
+        cgLaptopSlno: this.state.cgLaptopSlno,
+        dbsLaptopSlno: this.state.dbsLaptopSlno,
+        dateOfLaptopTaken: this.state.dateOfLaptopTaken,
+        dateOfLaptopReturn: this.state.dateOfLaptopReturn,
+        spoc: this.state.spoc,
+      };
+  
+      console.log("emp Personal details => " + JSON.stringify(associatePersonal));
+      PersonalService.createPersonal(associatePersonal).then((res) => {
+        alert("Employee Personal Details Added Successfully");
+        this.props.history.push(`/personalinfo`);
+      });
+    }else{
+      alert('Please check data once again!!');
+      console.error('Invalid Form')
+    }
   };
 
   changeCgGroupIdHandler = (event) => {
-    this.setState({ cgGroupId: event.target.value });
+    let errors = this.state.errors;
+    errors.cgGroupId = 
+          (event.target.value.length < 0 || event.target.value==='')
+            ? '*Please specify CG group Id!'
+            : '';
+    this.setState({errors, cgGroupId: event.target.value });
   };
 
   changeAssociateFullNameHandler = (event) => {
-    this.setState({ associateFullName: event.target.value });
+    let errors = this.state.errors;
+    errors.associateFullName = 
+          event.target.value.length < 5
+            ? 'Full Name must be at least 5 characters long!'
+            : '';
+    this.setState({ errors, associateFullName: event.target.value });
   };
   changeCgUserNameHandler = (event) => {
+    
     this.setState({ cgUserName: event.target.value });
   };
   changeGenderHandler = (event) => {
@@ -188,7 +226,13 @@ class AddPersonal extends Component {
     this.setState({ dateOfBirth: event.target.value });
   };
   changeCgMailIdHandler = (event) => {
-    this.setState({ cgMailId: event.target.value });
+    let errors = this.state.errors;
+    errors.cgMailId = 
+            validEmailRegex.test(event.target.value)
+            ? ''
+            : 'Email is not valid!';
+    
+    this.setState({ errors, cgMailId: event.target.value });
   };
   changeRegionHandler = (event) => {
     this.setState({ region: event.target.value });
@@ -230,7 +274,13 @@ class AddPersonal extends Component {
     this.setState({ bankId: event.target.value });
   };
   changeDbsMailIdHandler = (event) => {
-    this.setState({ dbsMailId: event.target.value });
+    let errors = this.state.errors;
+    errors.dbsMailId = 
+            validEmailRegex.test(event.target.value)
+            ? ''
+            : 'Email is not valid!';
+    
+    this.setState({errors, dbsMailId: event.target.value });
   };
   changePrimarySkillHandler = (event) => {
     this.setState({ primarySkill: event.target.value });
@@ -246,10 +296,24 @@ class AddPersonal extends Component {
     this.setState({ mandatoryTraining: event.target.value });
   };
   changePanCardHandler = (event) => {
-    this.setState({ panCard: event.target.value });
+    const panregex =/[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}/;
+    let errors = this.state.errors;
+    errors.panCard = 
+            panregex.test(event.target.value)
+            ? ''
+            : 'Pan card number is not valid!';
+    this.setState({errors, panCard: event.target.value });
   };
   changePassportHandler = (event) => {
-    this.setState({ passport: event.target.value });
+    
+    var regsaid = /[A-Z]{1}-[0-9]{7}/;
+    let errors = this.state.errors;
+    errors.passport = 
+            regsaid.test(event.target.value)
+            ? ''
+            : 'Passport number is not valid!';
+    
+    this.setState({errors, passport: event.target.value });
   };
   changePassportExpiryDateHandler = (event) => {
     this.setState({ passportExpiryDate: event.target.value });
@@ -297,6 +361,8 @@ class AddPersonal extends Component {
   }
 
   render() {
+    const {errors} = this.state;
+
     return (
       <div>
         <br></br>
@@ -315,7 +381,10 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgGroupId}
                       onChange={this.changeCgGroupIdHandler}
+                      onBlur={this.changeCgGroupIdHandler}
                     />
+                    {errors.cgGroupId.length > 0 && 
+                <span className='error'>{errors.cgGroupId}</span>}
                   </div>
                   <div className="form-group">
                     <label>AssociateFullName: </label>
@@ -326,7 +395,9 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.associateFullName}
                       onChange={this.changeAssociateFullNameHandler}
-                    />
+                    required/>
+                    {errors.associateFullName.length > 0 && 
+                <span className='error'>{errors.associateFullName}</span>}
                   </div>
 
                   <div className="form-group">
@@ -336,10 +407,11 @@ class AddPersonal extends Component {
                       name="gender"
                       value={this.state.gender}
                       onChange={this.changeGenderHandler}
-                    >
+                      required>
                       <option value="">-Select Gender-</option>
                       <option value="M">Male</option>
                       <option value="F">Female</option>
+                      <option value="O">Other</option>
                     </select>
                   </div>
                   <div className="form-group">
@@ -351,18 +423,20 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgUserName}
                       onChange={this.changeCgUserNameHandler}
-                    />
+                      required/>
                   </div>
                   <div className="form-group">
                     <label>CG MailId: </label>
                     <input
-                      type="text"
+                      type="email"
                       placeholder="enter your cgMaiId"
                       name="cgMailId"
                       className="form-control"
                       value={this.state.cgMailId}
                       onChange={this.changeCgMailIdHandler}
-                    />
+                      required/>
+                    {errors.cgMailId.length > 0 && 
+                    <span className='error'>{errors.cgMailId}</span>}
                   </div>
                   <div className="form-group">
                     <label for="region">Region: </label>
@@ -371,7 +445,7 @@ class AddPersonal extends Component {
                       name="region"
                       value={this.state.region}
                       onChange={this.changeRegionHandler}
-                    >
+                      required>
                       <option value="">-Select Option-</option>
                       <option value="IN">IN</option>
                       <option value="SG">SG</option>
@@ -385,7 +459,7 @@ class AddPersonal extends Component {
                       name="practice"
                       value={this.state.practice}
                       onChange={this.changePracticeHandler}
-                    >
+                      required>
                       <option value="">-Select Option-</option>
                       <option value="BCM-CEN">BCM-CEN</option>
                       <option value="GP-INS-GW">GP-INS-GW</option>
@@ -535,7 +609,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.designation}
                       onChange={this.changeDesignationHandler}
-                    />
+                      required/>
                   </div>
                   <div className="form-group">
                     <label>CG-Supervisor: </label>
@@ -546,7 +620,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgSupervisor}
                       onChange={this.changeCgSupervisorHandler}
-                    />
+                      required/>
                   </div>
                   <div className="form-group">
                     <label>CG-DBS account-supervisor: </label>
@@ -557,7 +631,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgDBSAccountSupervisor}
                       onChange={this.changeCgDBSAccountSupervisorHandler}
-                    />
+                      required/>
                   </div>
                   <div className="form-group">
                     <label>DBS Client Lead: </label>
@@ -568,6 +642,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dbsClientLead}
                       onChange={this.changeDbsClientLeadHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -577,6 +652,7 @@ class AddPersonal extends Component {
                       name="tower"
                       value={this.state.tower}
                       onChange={this.changeTowerHandler}
+                      required
                     >
                       <option value="">-Select option-</option>
                       <option value="MOT">MOT</option>
@@ -592,6 +668,7 @@ class AddPersonal extends Component {
                       name="shortTower"
                       value={this.state.shortTower}
                       onChange={this.changeShortTowerHandler}
+                      required
                     >
                       <option value="">-Select option-</option>
                       <option value="Management">Management</option>
@@ -628,6 +705,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.reasonResignation}
                       onChange={this.changeReasonResignationHandler}
+                      required
                     />
                   </div>
 
@@ -640,6 +718,7 @@ class AddPersonal extends Component {
                       name="associateLocation"
                       value={this.state.associateLocation}
                       onChange={this.changeAssociateLocationHandler}
+                      required
                     >
                       <option value="">-Select Option-</option>
                       <option value="CAPG ODC">CAPG ODC</option>
@@ -655,6 +734,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dateOfJoiningDBSAccount}
                       onChange={this.changeDateOfJoiningDBSAccountHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -665,6 +745,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dbsBillableStartDate}
                       onChange={this.changeDbsBillableStartDateHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -675,6 +756,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.bankId}
                       onChange={this.changeBankIdHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -685,7 +767,10 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dbsMailId}
                       onChange={this.changeDbsMailIdHandler}
+                      required
                     />
+                    {errors.dbsMailId.length > 0 && 
+                    <span className='error'>{errors.dbsMailId}</span>}
                   </div>
                   <div className="form-group">
                     <label>Primary skill: </label>
@@ -695,6 +780,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.primarySkill}
                       onChange={this.changePrimarySkillHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -709,6 +795,7 @@ class AddPersonal extends Component {
                       onChange={
                         this.changeOverallExperienceBeforeJoiningCgHandler
                       }
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -719,6 +806,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.sowNumber}
                       onChange={this.changeSowNumberHandler}
+                      required
                     />
                   </div>
 
@@ -730,6 +818,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.mandatoryTraining}
                       onChange={this.changeMandatoryTrainingHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -741,6 +830,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.onboardingDocs}
                       onChange={this.changeOnboardingDocsHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -751,7 +841,10 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.panCard}
                       onChange={this.changePanCardHandler}
+                      required
                     />
+                     {errors.panCard.length > 0 && 
+                    <span className='error'>{errors.panCard}</span>}
                   </div>
                   <div className="form-group">
                     <label>Passport: </label>
@@ -761,7 +854,10 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.passport}
                       onChange={this.changePassportHandler}
+                      required
                     />
+                    {errors.passport.length > 0 && 
+                    <span className='error'>{errors.passport}</span>}
                   </div>
                   <div className="form-group">
                     <label>Passport Expiry Date: </label>
@@ -771,6 +867,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.passportExpiryDate}
                       onChange={this.changePassportExpiryDateHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -782,6 +879,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dateOfBirth}
                       onChange={this.changeDateOfBirthHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -795,6 +893,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.foreignEmploymentExperience}
                       onChange={this.changeForeignEmploymentExperienceHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -806,6 +905,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.contact}
                       onChange={this.changeContactHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -816,6 +916,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.emergencyContact}
                       onChange={this.changeEmergencyContactHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -827,6 +928,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.temporaryAddress}
                       onChange={this.changeTemporaryAddressHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -838,6 +940,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.permanentAddress}
                       onChange={this.changePermanentAddressHandler}
+                      required
                     />
                   </div>
 
@@ -850,6 +953,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.csbForm}
                       onChange={this.changeCbsFormHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -860,6 +964,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgLaptopSlno}
                       onChange={this.changeCgLaptopSlnoHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -870,6 +975,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dbsLaptopSlno}
                       onChange={this.changeDbsLaptopSlnoHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -880,6 +986,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dateOfLaptopTaken}
                       onChange={this.changeDateOfLaptopTakenHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -890,6 +997,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.dateOfLaptopReturn}
                       onChange={this.changeDateOfLaptopReturnHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -900,6 +1008,7 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.spoc}
                       onChange={this.changeSpocHandler}
+                      required
                     />
                   </div>
 
