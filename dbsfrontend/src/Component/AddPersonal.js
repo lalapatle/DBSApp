@@ -839,6 +839,7 @@ class AddPersonal extends Component {
                       type="text"
                       name="panCard"
                       className="form-control"
+                      placeholder="Enter Pan Card No (e.g: ABCE1234F)"
                       value={this.state.panCard}
                       onChange={this.changePanCardHandler}
                       required
@@ -852,6 +853,7 @@ class AddPersonal extends Component {
                       type="text"
                       name="passport"
                       className="form-control"
+                      placeholder="Enter Passport No (e.g: A-1234567)"
                       value={this.state.passport}
                       onChange={this.changePassportHandler}
                       required
