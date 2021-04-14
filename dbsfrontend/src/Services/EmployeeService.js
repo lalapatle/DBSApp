@@ -30,6 +30,10 @@ class EmployeeService {
   deleteAssociate(sno){
     return axios.delete(EMPLOYEE_API_BASE_URL+"deleteAssociate/"+sno);
   }
+
+  getByCgId(cgGroupId) {
+    return axios.get(EMPLOYEE_API_BASE_URL + "get-professional-by-cgGroupId/" + cgGroupId);
+  }
 }
 
 export default new EmployeeService();

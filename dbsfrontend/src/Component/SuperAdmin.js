@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import EmployeeService from "../Services/EmployeeService";
 import "../App.css";
+import SearchIcon from "@material-ui/icons/Search";
+
+
 class SuperAdmin extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +15,23 @@ class SuperAdmin extends Component {
     this.editEmployee = this.editEmployee.bind(this);
     this.changeback = this.changeback.bind(this);
     this.generateReport = this.generateReport.bind(this);
+    this.SearchChange=this.SearchChange.bind(this);
+
   }
+
+  SearchChange= (e) => {
+    this.setState({
+      cgGroupId: e.target.value,
+    });
+  };
+
+  searchAssociate = (e) => {
+    e.preventDefault();
+    this.props.history.push(
+      `/search-by-cgGroupId/${this.state.cgGroupId}`
+    );
+  };
+
   generateReport() {
     EmployeeService.getReport().then((res) => {
       alert("Report Genrate");
@@ -52,18 +71,39 @@ class SuperAdmin extends Component {
     return (
       <div className="container">
         <h2 className="text-center headingtitle">Super Admin</h2>
-        <div className="row">
+        <div className="row header">
+        <div className="left-div">
           <button id="margin" onClick={this.addEmployee} class="button">
             Add
           </button>
           <button
             id="margin"
-            style={{ marginLeft: "20px" }}
+            style={{ marginLeft: "45px" }}
             onClick={() => this.changeback()}
             class="button"
           >
             Back
           </button>
+          </div>
+          <div className="right-div">
+            <div className="input-group searchBar">
+              <input
+                type="text"
+                className="form-control searchInput"
+                placeholder="Search BY cgGroupId"
+                onChange={this.SearchChange}
+              />
+              <div className="input-group-append">
+                <button
+                  className="btn searchButton"
+                  type="button"
+                  onClick={this.searchAssociate}
+                >
+                <SearchIcon/>
+                </button>
+              </div>
+          </div>
+        </div>
         </div>
         <br></br>
         <div className="row">

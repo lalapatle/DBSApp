@@ -17,6 +17,7 @@ class PersonalService {
     return axios.get(PERSONAL_API_BASE_URL + "/" + cgGroupId);
   }
 
+  
   updatePersonal(personal, cgGroupId) {
     return axios.put(PERSONAL_API_BASE_URL + "/update/" + cgGroupId, personal);
   }
