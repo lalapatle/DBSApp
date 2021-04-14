@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import EmployeeService from "../Services/EmployeeService";
+
+const validateForm = errors => {
+  let valid = true;
+  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+  return valid;
+};
+
 class AddEmploee extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +24,10 @@ class AddEmploee extends Component {
       poNumbers: "",
       comments: "",
       cgGroupId: "",
+
+      errors: {
+        cgGroupId:'',
+      }
     };
     this.changeResourceStatusHandler = this.changeResourceStatusHandler.bind(
       this
@@ -37,28 +48,36 @@ class AddEmploee extends Component {
 
   saveProfessional = (p) => {
     p.preventDefault();
-    let personal = {
-      sNo: this.state.sNo,
-      resourceStatus: this.state.resourceStatus,
-      billability: this.state.billability,
-      currency: this.state.currency,
-      lwdAccount: this.state.lwdAccount,
-      lwdReason: this.state.lwdReason,
-      pesStatus: this.state.pesStatus,
-      billRate: this.state.billRate,
-      sowStart: this.state.sowStart,
-      sowEnd: this.state.sowEnd,
-      poNumbers: this.state.poNumbers,
-      comments: this.state.comments,
-      cgGroupId: this.state.cgGroupId,
-    };
-    console.log("personal => " + JSON.stringify(personal));
-    EmployeeService.createEmployee(this.state.cgGroupId, personal).then(
-      (res) => {
-        alert("Details Added Successfully. :)");
-        this.props.history.push("/employee");
-      }
-    );
+
+    if(validateForm(this.state.errors)) {
+      console.info('Valid Form');
+      let personal = {
+        sNo: this.state.sNo,
+        resourceStatus: this.state.resourceStatus,
+        billability: this.state.billability,
+        currency: this.state.currency,
+        lwdAccount: this.state.lwdAccount,
+        lwdReason: this.state.lwdReason,
+        pesStatus: this.state.pesStatus,
+        billRate: this.state.billRate,
+        sowStart: this.state.sowStart,
+        sowEnd: this.state.sowEnd,
+        poNumbers: this.state.poNumbers,
+        comments: this.state.comments,
+        cgGroupId: this.state.cgGroupId,
+      };
+      console.log("personal => " + JSON.stringify(personal));
+      EmployeeService.createEmployee(this.state.cgGroupId, personal).then(
+        (res) => {
+          alert("Details Added Successfully. :)");
+          this.props.history.push("/employee");
+        }
+      );
+    }else{
+      alert('Please check data once again!!');
+      console.error('Invalid Form')
+    }
+    
   };
 
   changeResourceStatusHandler = (event) => {
@@ -97,7 +116,12 @@ class AddEmploee extends Component {
   };
 
   changeCgGroupIdHandler = (event) => {
-    this.setState({ cgGroupId: event.target.value });
+    let errors = this.state.errors;
+    errors.cgGroupId = 
+          (event.target.value.length < 0 || event.target.value==='')
+            ? '*Please specify CG group Id!'
+            : '';
+    this.setState({errors, cgGroupId: event.target.value });
   };
 
   cancel() {
@@ -105,6 +129,9 @@ class AddEmploee extends Component {
   }
 
   render() {
+
+    const {errors} = this.state;
+
     return (
       <div>
         <br></br>
@@ -244,7 +271,10 @@ class AddEmploee extends Component {
                       className="form-control"
                       value={this.state.cgGroupId}
                       onChange={this.changeCgGroupIdHandler}
+                      onBlur={this.changeCgGroupIdHandler}
                     />
+                    {errors.cgGroupId.length > 0 && 
+                <span className='error'>{errors.cgGroupId}</span>}
                   </div>
 
                   <button className="btn btn-info formbtn">Save</button>
