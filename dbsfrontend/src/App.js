@@ -16,6 +16,7 @@ import SuperAdmin from "./Component/SuperAdmin";
 import ViewSuperAdmin from "./Component/ViewSuperAdmin";
 import UpdateSuperAdmin from "./Component/UpdateSuperAdmin";
 import AddSuperAdmin from "./Component/AddSuperAdmin";
+import SearchByCgGroupId from "./Component/SearchByCgGroupId";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/add-emp/:cgGroupId" component={AddEmploee} />
           <Route path="/update-emp/:sNo" component={UpdateEmployee} />
           <Route path="/update-superadmin/:sNo" component={UpdateSuperAdmin} />
+          <Route path="/search-by-cgGroupId/:cgGroupId" component={SearchByCgGroupId} />
         </Switch>
         <Footer />
       </>
