@@ -29,6 +29,9 @@ class AssociatePortal extends Component {
   viewemployee(cgGroupId) {
     this.props.history.push(`/view/${cgGroupId}`);
   }
+  gotoProfile(cgGroupId) {
+    this.props.history.push(`/profile/${cgGroupId}`);
+  }
   changeback() {
     this.props.history.push(`/login`);
   }
@@ -37,7 +40,12 @@ class AssociatePortal extends Component {
       <div className="container">
         <h2 className="text-center headingtitle">AssociateDetails</h2>
         <div className="row">
-          <button id="margin" onClick={this.addPersonal} class="button">
+          <button
+            id="margin"
+            onClick={this.addPersonal}
+            class="button"
+            style={{ marginLeft: "20px" }}
+          >
             Add
           </button>
           <button
@@ -47,6 +55,14 @@ class AssociatePortal extends Component {
             class="button"
           >
             Back
+          </button>
+          <button
+            id="margin"
+            style={{ marginLeft: "800px" }}
+            onClick={() => this.gotoProfile(this.state.employee.cgGroupId)}
+            class="button"
+          >
+            Profile
           </button>
         </div>
         <br></br>

@@ -1,0 +1,44 @@
+.profilebtn {
+  display: flex;
+  flex-direction: column;
+  /* flex-flow: column; */
+  margin: 20px;
+}
+button.pbtn {
+  margin: 15px;
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #012a4a;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 9px #999;
+}
+
+.changebtn {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #012a4a;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 9px #999;
+}
+.btnchange {
+  margin-left: 65px;
+}
+.card.col-md-6.offset-md-3.card {
+  border: 5px groove #012a4a;
+}
+.Content {
+  padding: 40px;
+}
+input.comman {
+  margin-left: 30px !important;
+  background-color: aliceblue;
+  color: black;
+}

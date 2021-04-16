@@ -83,7 +83,7 @@ class Login extends Component {
           <p className="sign" align="center">
             Sign In
           </p>
-          <form className="form1">
+          <form className="form1 loginform">
             <input
               className="un"
               type="text"

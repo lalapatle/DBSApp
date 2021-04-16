@@ -9,6 +9,11 @@ class LoginService {
   signIn(login) {
     return axios.post(BASE_URL + "login", login);
   }
+
+  resetPassword(login) {
+    return axios.post(BASE_URL + "reset", login);
+  }
+  reset;
 }
 
 export default new LoginService();

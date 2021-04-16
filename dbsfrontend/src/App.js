@@ -20,6 +20,7 @@ import SearchByCgGroupId from "./Component/SearchByCgGroupId";
 import Login from "./Component/Login";
 import ForgetPassword from "./Component/ForgetPassword";
 import AssociatePortal from "./Component/AssociatePortal";
+import Profile from "./Component/Profile";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             component={AssociatePortal}
           />
           <Route exact path="/login" component={Login} />
+          <Route path="/profile/:cgGroupId" component={Profile} />
           <Route path="/forgetpassword" component={ForgetPassword} />
           <Route path="/superAdmin" component={SuperAdmin} />
           <Route path="/personalinfo" component={Personalinfo} />
