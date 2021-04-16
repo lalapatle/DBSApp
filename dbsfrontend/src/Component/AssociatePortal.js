@@ -86,11 +86,13 @@ class AssociatePortal extends Component {
                 <th>Reason Resignation</th>
                 <th>Associtae Location</th>
                 <th>DOj Dbs Account</th>
+                <th>DOj Capgemini Company</th>
                 <th>Dbs Billable start DateOfBirth</th>
                 <th>Bank Id</th>
                 <th>Dbs MAil Id </th>
                 <th>Primary Skill</th>
                 <th>Overall Experience before joining cg</th>
+                <th>Total Experience</th>
                 <th>sowNumber</th>
                 <th>mandatory Training</th>
                 <th>Onboarding Docs</th>
@@ -132,11 +134,13 @@ class AssociatePortal extends Component {
               <td>{this.state.employee.reasonResignation}</td>
               <td>{this.state.employee.associateLocation}</td>
               <td>{this.state.employee.dateOfJoiningDBSAccount}</td>
+              <td>{this.state.employee.dateOfJoiningCGCompany}</td>
               <td>{this.state.employee.dbsBillableStartDate}</td>
               <td>{this.state.employee.bankId}</td>
               <td>{this.state.employee.dbsMailId}</td>
               <td>{this.state.employee.primarySkill}</td>
               <td>{this.state.employee.overallExperienceBeforeJoiningCg}</td>
+              <td>{this.state.employee.totalExperience}</td>
               <td>{this.state.employee.sowNumber}</td>
               <td>{this.state.employee.mandatoryTraining}</td>
               <td>{this.state.employee.onboardingDocs}</td>

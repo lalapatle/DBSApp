@@ -31,11 +31,13 @@ class AddPersonal extends Component {
       reasonResignation: "",
       associateLocation: "",
       dateOfJoiningDBSAccount: "",
+      dateOfJoiningCGCompany: "",
       dbsBillableStartDate: "",
       bankId: "",
       dbsMailId: "",
       primarySkill: "",
       overallExperienceBeforeJoiningCg: "",
+      // totalExperience: "",
       sowNumber: "",
       mandatoryTraining: "",
       onboardingDocs: "",
@@ -134,6 +136,9 @@ class AddPersonal extends Component {
     this.changeDateOfLaptopReturnHandler = this.changeDateOfLaptopReturnHandler.bind(
       this
     );
+    this.changeDateOfJoiningCGCompanyHandler = this.changeDateOfJoiningCGCompanyHandler.bind(
+      this
+    );
     this.changeSpocHandler = this.changeSpocHandler.bind(this);
     this.AddPersonalDetails = this.AddPersonalDetails.bind(this);
   }
@@ -160,6 +165,7 @@ class AddPersonal extends Component {
         reasonResignation: this.state.reasonResignation,
         associateLocation: this.state.associateLocation,
         dateOfJoiningDBSAccount: this.state.dateOfJoiningDBSAccount,
+        dateOfJoiningCGCompany: this.state.dateOfJoiningCGCompany,
         dbsBillableStartDate: this.state.dbsBillableStartDate,
         bankId: this.state.bankId,
         dbsMailId: this.state.dbsMailId,
@@ -265,6 +271,10 @@ class AddPersonal extends Component {
   };
   changeDateOfJoiningDBSAccountHandler = (event) => {
     this.setState({ dateOfJoiningDBSAccount: event.target.value });
+  };
+
+  changeDateOfJoiningCGCompanyHandler = (event) => {
+    this.setState({ dateOfJoiningCGCompany: event.target.value });
   };
   changeDbsBillableStartDateHandler = (event) => {
     this.setState({ dbsBillableStartDate: event.target.value });
@@ -744,6 +754,19 @@ class AddPersonal extends Component {
                       required
                     />
                   </div>
+
+                  <div className="form-group">
+                    <label>Date of Joining of Capgemini Company: </label>
+                    <input
+                      type="date"
+                      name="dateOfJoiningCGCompany"
+                      className="form-control"
+                      value={this.state.dateOfJoiningCGCompany}
+                      onChange={this.changeDateOfJoiningCGCompanyHandler}
+                      required
+                    />
+                  </div>
+
                   <div className="form-group">
                     <label>Billabale start date: </label>
                     <input
@@ -793,7 +816,7 @@ class AddPersonal extends Component {
                   </div>
                   <div className="form-group">
                     <label>
-                      Overall Experience before joining CG in months:{" "}
+                      Overall Experience before joining CG in months:
                     </label>
                     <input
                       type="number"
@@ -803,9 +826,25 @@ class AddPersonal extends Component {
                       onChange={
                         this.changeOverallExperienceBeforeJoiningCgHandler
                       }
-                      required
                     />
                   </div>
+
+                  {/* <div className="form-group">
+                    <label>
+                      Total Experience
+                    </label>
+                    <input
+                      type="number"
+                      name="totalExperience"
+                      className="form-control"
+                      value={this.state.totalExperience}
+                      onChange={
+                        this.changeTotalExperienceHandler
+                      }
+                      required
+                    />
+                  </div> */}
+
                   <div className="form-group">
                     <label>SOW Number/Beeline Assignment Id: </label>
                     <input
