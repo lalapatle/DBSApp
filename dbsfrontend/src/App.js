@@ -17,6 +17,9 @@ import ViewSuperAdmin from "./Component/ViewSuperAdmin";
 import UpdateSuperAdmin from "./Component/UpdateSuperAdmin";
 import AddSuperAdmin from "./Component/AddSuperAdmin";
 import SearchByCgGroupId from "./Component/SearchByCgGroupId";
+import Login from "./Component/Login";
+import ForgetPassword from "./Component/ForgetPassword";
+import AssociatePortal from "./Component/AssociatePortal";
 
 function App() {
   return (
@@ -25,6 +28,13 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/associatePortal/:cgGroupId"
+            component={AssociatePortal}
+          />
+          <Route exact path="/login" component={Login} />
+          <Route path="/forgetpassword" component={ForgetPassword} />
           <Route path="/superAdmin" component={SuperAdmin} />
           <Route path="/personalinfo" component={Personalinfo} />
           <Route path="/employee" component={Employeee} />
@@ -37,7 +47,10 @@ function App() {
           <Route path="/add-emp/:cgGroupId" component={AddEmploee} />
           <Route path="/update-emp/:sNo" component={UpdateEmployee} />
           <Route path="/update-superadmin/:sNo" component={UpdateSuperAdmin} />
-          <Route path="/search-by-cgGroupId/:cgGroupId" component={SearchByCgGroupId} />
+          <Route
+            path="/search-by-cgGroupId/:cgGroupId"
+            component={SearchByCgGroupId}
+          />
         </Switch>
         <Footer />
       </>

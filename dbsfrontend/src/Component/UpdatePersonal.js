@@ -217,7 +217,7 @@ class UpdatePersonal extends Component {
     console.log("cgGroupId => " + JSON.stringify(this.state.cgGroupId));
     PersonalService.updatePersonal(personal, this.state.cgGroupId).then(
       (res) => {
-        this.props.history.push("/personalinfo");
+        this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
       }
     );
   };
@@ -345,7 +345,7 @@ class UpdatePersonal extends Component {
   };
 
   cancel() {
-    this.props.history.push("/personalinfo");
+    this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
   }
 
   render() {

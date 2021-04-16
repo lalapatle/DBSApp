@@ -18,7 +18,7 @@ class ViewPersonal extends Component {
   }
 
   cancel() {
-    this.props.history.push("/Personalinfo");
+    this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
   }
   render() {
     return (

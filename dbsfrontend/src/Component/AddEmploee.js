@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import EmployeeService from "../Services/EmployeeService";
 
-const validateForm = errors => {
+const validateForm = (errors) => {
   let valid = true;
-  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+  Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
   return valid;
 };
 
@@ -26,8 +26,8 @@ class AddEmploee extends Component {
       cgGroupId: "",
 
       errors: {
-        cgGroupId:'',
-      }
+        cgGroupId: "",
+      },
     };
     this.changeResourceStatusHandler = this.changeResourceStatusHandler.bind(
       this
@@ -49,8 +49,8 @@ class AddEmploee extends Component {
   saveProfessional = (p) => {
     p.preventDefault();
 
-    if(validateForm(this.state.errors)) {
-      console.info('Valid Form');
+    if (validateForm(this.state.errors)) {
+      console.info("Valid Form");
       let personal = {
         sNo: this.state.sNo,
         resourceStatus: this.state.resourceStatus,
@@ -70,14 +70,13 @@ class AddEmploee extends Component {
       EmployeeService.createEmployee(this.state.cgGroupId, personal).then(
         (res) => {
           alert("Details Added Successfully. :)");
-          this.props.history.push("/employee");
+          this.props.history.push(`/employee`);
         }
       );
-    }else{
-      alert('Please check data once again!!');
-      console.error('Invalid Form')
+    } else {
+      alert("Please check data once again!!");
+      console.error("Invalid Form");
     }
-    
   };
 
   changeResourceStatusHandler = (event) => {
@@ -117,20 +116,19 @@ class AddEmploee extends Component {
 
   changeCgGroupIdHandler = (event) => {
     let errors = this.state.errors;
-    errors.cgGroupId = 
-          (event.target.value.length < 0 || event.target.value==='')
-            ? '*Please specify CG group Id!'
-            : '';
-    this.setState({errors, cgGroupId: event.target.value });
+    errors.cgGroupId =
+      event.target.value.length < 0 || event.target.value === ""
+        ? "*Please specify CG group Id!"
+        : "";
+    this.setState({ errors, cgGroupId: event.target.value });
   };
 
   cancel() {
-    this.props.history.push("/employee");
+    this.props.history.push(`/employee`);
   }
 
   render() {
-
-    const {errors} = this.state;
+    const { errors } = this.state;
 
     return (
       <div>
@@ -199,6 +197,7 @@ class AddEmploee extends Component {
                       className="form-control"
                       value={this.state.lwdReason}
                       onChange={this.changeLwdReasonHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -229,6 +228,7 @@ class AddEmploee extends Component {
                       className="form-control"
                       value={this.state.sowStart}
                       onChange={this.changeSowStartHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -239,6 +239,7 @@ class AddEmploee extends Component {
                       className="form-control"
                       value={this.state.sowEnd}
                       onChange={this.changeSowEndHandler}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -273,8 +274,9 @@ class AddEmploee extends Component {
                       onChange={this.changeCgGroupIdHandler}
                       onBlur={this.changeCgGroupIdHandler}
                     />
-                    {errors.cgGroupId.length > 0 && 
-                <span className='error'>{errors.cgGroupId}</span>}
+                    {errors.cgGroupId.length > 0 && (
+                      <span className="error">{errors.cgGroupId}</span>
+                    )}
                   </div>
 
                   <button className="btn btn-info formbtn">Save</button>

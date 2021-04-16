@@ -274,10 +274,7 @@ class ViewSuperAdmin extends Component {
 
               <div className="row">
                 <label>Date of laptop Return:</label>&nbsp;&nbsp;
-                <div>
-                  {" "}
-                  {this.state.emp.associatePersonal.dateOfLaptopReturn}
-                </div>
+                <div>{this.state.emp.associatePersonal.dateOfLaptopReturn}</div>
               </div>
 
               <div className="row">
