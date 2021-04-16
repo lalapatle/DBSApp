@@ -17,10 +17,12 @@ class Header extends Component {
             <h2 className="title">DBS PROCESS INFORMATION MANAGEMENT SYSTEM</h2>
           </div>
           <div className="col-md-2">
-          <img
-            className="image-dbs"
-            src={'https://seekvectorlogo.com/wp-content/uploads/2019/11/dbs-bank-vector-logo.png'}
-           />
+            <img
+              className="image-dbs"
+              src={
+                "https://seekvectorlogo.com/wp-content/uploads/2019/11/dbs-bank-vector-logo.png"
+              }
+            />
           </div>
         </div>
       </div>

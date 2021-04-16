@@ -18,7 +18,7 @@ class ViewPersonal extends Component {
   }
 
   cancel() {
-    this.props.history.push("/Personalinfo");
+    this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
   }
   render() {
     return (
@@ -92,6 +92,12 @@ class ViewPersonal extends Component {
               <label>Date of DBS Account Joining :</label>&nbsp;&nbsp;
               <div> {this.state.employe.dateOfJoiningDBSAccount}</div>
             </div>
+
+            <div className="row">
+              <label>Date of Joining Capgemini Company :</label>&nbsp;&nbsp;
+              <div> {this.state.employe.dateOfJoiningCGCompany}</div>
+            </div>
+
             <div className="row">
               <label>DBS Billable strat date:</label>&nbsp;&nbsp;
               <div> {this.state.employe.dbsBillableStartDate}</div>
@@ -115,6 +121,12 @@ class ViewPersonal extends Component {
               <label>Overall Experience before joining cg in months:</label>
               &nbsp;&nbsp;
               <div> {this.state.employe.overallExperienceBeforeJoiningCg}</div>
+            </div>
+
+            <div className="row">
+              <label>Total Experience in months:</label>
+              &nbsp;&nbsp;
+              <div> {this.state.employe.totalExperience}</div>
             </div>
 
             <div className="row">

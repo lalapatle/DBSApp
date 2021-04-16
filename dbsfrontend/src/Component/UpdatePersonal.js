@@ -22,6 +22,7 @@ class UpdatePersonal extends Component {
       reasonResignation: "",
       associateLocation: "",
       dateOfJoiningDBSAccount: "",
+      dateOfJoiningCGCompany: "",
       dbsBillableStartDate: "",
       bankId: "",
       dbsMailId: "",
@@ -70,6 +71,9 @@ class UpdatePersonal extends Component {
       this
     );
     this.changeDateOfJoiningDBSAccountHandler = this.changeDateOfJoiningDBSAccountHandler.bind(
+      this
+    );
+    this.changeDateOfJoiningCGCompanyHandler = this.changeDateOfJoiningCGCompanyHandler.bind(
       this
     );
     this.changeDbsBillableStartDateHandler = this.changeDbsBillableStartDateHandler.bind(
@@ -141,6 +145,7 @@ class UpdatePersonal extends Component {
         reasonResignation: personal.reasonResignation,
         associateLocation: personal.associateLocation,
         dateOfJoiningDBSAccount: personal.dateOfJoiningDBSAccount,
+        dateOfJoiningCGCompany: personal.dateOfJoiningCGCompany,
         dbsBillableStartDate: personal.dbsBillableStartDate,
         bankId: personal.bankId,
         dbsMailId: personal.dbsMailId,
@@ -188,6 +193,7 @@ class UpdatePersonal extends Component {
       reasonResignation: this.state.reasonResignation,
       associateLocation: this.state.associateLocation,
       dateOfJoiningDBSAccount: this.state.dateOfJoiningDBSAccount,
+      dateOfJoiningCGCompany: this.state.dateOfJoiningCGCompany,
       dbsBillableStartDate: this.state.dbsBillableStartDate,
       bankId: this.state.bankId,
       dbsMailId: this.state.dbsMailId,
@@ -217,7 +223,7 @@ class UpdatePersonal extends Component {
     console.log("cgGroupId => " + JSON.stringify(this.state.cgGroupId));
     PersonalService.updatePersonal(personal, this.state.cgGroupId).then(
       (res) => {
-        this.props.history.push("/personalinfo");
+        this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
       }
     );
   };
@@ -273,6 +279,9 @@ class UpdatePersonal extends Component {
   };
   changeDateOfJoiningDBSAccountHandler = (event) => {
     this.setState({ dateOfJoiningDBSAccount: event.target.value });
+  };
+  changeDateOfJoiningCGCompanyHandler = (event) => {
+    this.setState({ dateOfJoiningCGCompany: event.target.value });
   };
   changeDbsBillableStartDateHandler = (event) => {
     this.setState({ dbsBillableStartDate: event.target.value });
@@ -345,7 +354,7 @@ class UpdatePersonal extends Component {
   };
 
   cancel() {
-    this.props.history.push("/personalinfo");
+    this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
   }
 
   render() {
@@ -709,6 +718,18 @@ class UpdatePersonal extends Component {
                       onChange={this.changeDateOfJoiningDBSAccountHandler}
                     />
                   </div>
+
+                  <div className="form-group">
+                    <label>Date of Joining of Capgemini Company: </label>
+                    <input
+                      type="date"
+                      name="dateOfJoiningCGCompany"
+                      className="form-control"
+                      value={this.state.dateOfJoiningCGCompany}
+                      onChange={this.changeDateOfJoiningCGCompanyHandler}
+                    />
+                  </div>
+
                   <div className="form-group">
                     <label>Billabale start date: </label>
                     <input
@@ -751,7 +772,7 @@ class UpdatePersonal extends Component {
                   </div>
                   <div className="form-group">
                     <label>
-                      Overall Experience before joining CG in months:{" "}
+                      Overall Experience before joining CG in months:
                     </label>
                     <input
                       type="number"

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PersonalService from "../Services/PersonalService";
 import "../Component/Addpersonal.css";
-const validateForm = errors => {
+const validateForm = (errors) => {
   let valid = true;
-  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
+  Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
   return valid;
 };
 
@@ -31,11 +31,13 @@ class AddPersonal extends Component {
       reasonResignation: "",
       associateLocation: "",
       dateOfJoiningDBSAccount: "",
+      dateOfJoiningCGCompany: "",
       dbsBillableStartDate: "",
       bankId: "",
       dbsMailId: "",
       primarySkill: "",
       overallExperienceBeforeJoiningCg: "",
+      // totalExperience: "",
       sowNumber: "",
       mandatoryTraining: "",
       onboardingDocs: "",
@@ -55,13 +57,13 @@ class AddPersonal extends Component {
       spoc: "",
 
       errors: {
-        cgGroupId:'',
-        associateFullName: '',
-        cgMailId: '',
-        dbsMailId: '',
-        passport:'',
-        panCard:'',
-      }
+        cgGroupId: "",
+        associateFullName: "",
+        cgMailId: "",
+        dbsMailId: "",
+        passport: "",
+        panCard: "",
+      },
     };
     this.changeCgGroupIdHandler = this.changeCgGroupIdHandler.bind(this);
     this.changeAssociateFullNameHandler = this.changeAssociateFullNameHandler.bind(
@@ -134,6 +136,9 @@ class AddPersonal extends Component {
     this.changeDateOfLaptopReturnHandler = this.changeDateOfLaptopReturnHandler.bind(
       this
     );
+    this.changeDateOfJoiningCGCompanyHandler = this.changeDateOfJoiningCGCompanyHandler.bind(
+      this
+    );
     this.changeSpocHandler = this.changeSpocHandler.bind(this);
     this.AddPersonalDetails = this.AddPersonalDetails.bind(this);
   }
@@ -141,9 +146,8 @@ class AddPersonal extends Component {
   AddPersonalDetails = (e) => {
     e.preventDefault();
 
-   
-    if(validateForm(this.state.errors)) {
-      console.info('Valid Form');
+    if (validateForm(this.state.errors)) {
+      console.info("Valid Form");
       let associatePersonal = {
         cgGroupId: this.state.cgGroupId,
         associateFullName: this.state.associateFullName,
@@ -161,6 +165,7 @@ class AddPersonal extends Component {
         reasonResignation: this.state.reasonResignation,
         associateLocation: this.state.associateLocation,
         dateOfJoiningDBSAccount: this.state.dateOfJoiningDBSAccount,
+        dateOfJoiningCGCompany: this.state.dateOfJoiningCGCompany,
         dbsBillableStartDate: this.state.dbsBillableStartDate,
         bankId: this.state.bankId,
         dbsMailId: this.state.dbsMailId,
@@ -186,37 +191,38 @@ class AddPersonal extends Component {
         dateOfLaptopReturn: this.state.dateOfLaptopReturn,
         spoc: this.state.spoc,
       };
-  
-      console.log("emp Personal details => " + JSON.stringify(associatePersonal));
+
+      console.log(
+        "emp Personal details => " + JSON.stringify(associatePersonal)
+      );
       PersonalService.createPersonal(associatePersonal).then((res) => {
         alert("Employee Personal Details Added Successfully");
-        this.props.history.push(`/personalinfo`);
+        this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
       });
-    }else{
-      alert('Please check data once again!!');
-      console.error('Invalid Form')
+    } else {
+      alert("Please check data once again!!");
+      console.error("Invalid Form");
     }
   };
 
   changeCgGroupIdHandler = (event) => {
     let errors = this.state.errors;
-    errors.cgGroupId = 
-          (event.target.value.length < 0 || event.target.value==='')
-            ? '*Please specify CG group Id!'
-            : '';
-    this.setState({errors, cgGroupId: event.target.value });
+    errors.cgGroupId =
+      event.target.value.length < 0 || event.target.value === ""
+        ? "*Please specify CG group Id!"
+        : "";
+    this.setState({ errors, cgGroupId: event.target.value });
   };
 
   changeAssociateFullNameHandler = (event) => {
     let errors = this.state.errors;
-    errors.associateFullName = 
-          event.target.value.length < 5
-            ? 'Full Name must be at least 5 characters long!'
-            : '';
+    errors.associateFullName =
+      event.target.value.length < 5
+        ? "Full Name must be at least 5 characters long!"
+        : "";
     this.setState({ errors, associateFullName: event.target.value });
   };
   changeCgUserNameHandler = (event) => {
-    
     this.setState({ cgUserName: event.target.value });
   };
   changeGenderHandler = (event) => {
@@ -227,11 +233,10 @@ class AddPersonal extends Component {
   };
   changeCgMailIdHandler = (event) => {
     let errors = this.state.errors;
-    errors.cgMailId = 
-            validEmailRegex.test(event.target.value)
-            ? ''
-            : 'Email is not valid!';
-    
+    errors.cgMailId = validEmailRegex.test(event.target.value)
+      ? ""
+      : "Email is not valid!";
+
     this.setState({ errors, cgMailId: event.target.value });
   };
   changeRegionHandler = (event) => {
@@ -267,6 +272,10 @@ class AddPersonal extends Component {
   changeDateOfJoiningDBSAccountHandler = (event) => {
     this.setState({ dateOfJoiningDBSAccount: event.target.value });
   };
+
+  changeDateOfJoiningCGCompanyHandler = (event) => {
+    this.setState({ dateOfJoiningCGCompany: event.target.value });
+  };
   changeDbsBillableStartDateHandler = (event) => {
     this.setState({ dbsBillableStartDate: event.target.value });
   };
@@ -275,12 +284,11 @@ class AddPersonal extends Component {
   };
   changeDbsMailIdHandler = (event) => {
     let errors = this.state.errors;
-    errors.dbsMailId = 
-            validEmailRegex.test(event.target.value)
-            ? ''
-            : 'Email is not valid!';
-    
-    this.setState({errors, dbsMailId: event.target.value });
+    errors.dbsMailId = validEmailRegex.test(event.target.value)
+      ? ""
+      : "Email is not valid!";
+
+    this.setState({ errors, dbsMailId: event.target.value });
   };
   changePrimarySkillHandler = (event) => {
     this.setState({ primarySkill: event.target.value });
@@ -296,24 +304,21 @@ class AddPersonal extends Component {
     this.setState({ mandatoryTraining: event.target.value });
   };
   changePanCardHandler = (event) => {
-    const panregex =/[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}/;
+    const panregex = /[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}/;
     let errors = this.state.errors;
-    errors.panCard = 
-            panregex.test(event.target.value)
-            ? ''
-            : 'Pan card number is not valid!';
-    this.setState({errors, panCard: event.target.value });
+    errors.panCard = panregex.test(event.target.value)
+      ? ""
+      : "Pan card number is not valid!";
+    this.setState({ errors, panCard: event.target.value });
   };
   changePassportHandler = (event) => {
-    
     var regsaid = /[A-Z]{1}-[0-9]{7}/;
     let errors = this.state.errors;
-    errors.passport = 
-            regsaid.test(event.target.value)
-            ? ''
-            : 'Passport number is not valid!';
-    
-    this.setState({errors, passport: event.target.value });
+    errors.passport = regsaid.test(event.target.value)
+      ? ""
+      : "Passport number is not valid!";
+
+    this.setState({ errors, passport: event.target.value });
   };
   changePassportExpiryDateHandler = (event) => {
     this.setState({ passportExpiryDate: event.target.value });
@@ -357,11 +362,11 @@ class AddPersonal extends Component {
     this.setState({ spoc: event.target.value });
   };
   cancel() {
-    this.props.history.push("/personalinfo");
+    this.props.history.push(`/associatePortal/${this.state.cgGroupId}`);
   }
 
   render() {
-    const {errors} = this.state;
+    const { errors } = this.state;
 
     return (
       <div>
@@ -383,8 +388,9 @@ class AddPersonal extends Component {
                       onChange={this.changeCgGroupIdHandler}
                       onBlur={this.changeCgGroupIdHandler}
                     />
-                    {errors.cgGroupId.length > 0 && 
-                <span className='error'>{errors.cgGroupId}</span>}
+                    {errors.cgGroupId.length > 0 && (
+                      <span className="error">{errors.cgGroupId}</span>
+                    )}
                   </div>
                   <div className="form-group">
                     <label>AssociateFullName: </label>
@@ -395,9 +401,11 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.associateFullName}
                       onChange={this.changeAssociateFullNameHandler}
-                    required/>
-                    {errors.associateFullName.length > 0 && 
-                <span className='error'>{errors.associateFullName}</span>}
+                      required
+                    />
+                    {errors.associateFullName.length > 0 && (
+                      <span className="error">{errors.associateFullName}</span>
+                    )}
                   </div>
 
                   <div className="form-group">
@@ -407,7 +415,8 @@ class AddPersonal extends Component {
                       name="gender"
                       value={this.state.gender}
                       onChange={this.changeGenderHandler}
-                      required>
+                      required
+                    >
                       <option value="">-Select Gender-</option>
                       <option value="M">Male</option>
                       <option value="F">Female</option>
@@ -423,7 +432,8 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgUserName}
                       onChange={this.changeCgUserNameHandler}
-                      required/>
+                      required
+                    />
                   </div>
                   <div className="form-group">
                     <label>CG MailId: </label>
@@ -434,9 +444,11 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgMailId}
                       onChange={this.changeCgMailIdHandler}
-                      required/>
-                    {errors.cgMailId.length > 0 && 
-                    <span className='error'>{errors.cgMailId}</span>}
+                      required
+                    />
+                    {errors.cgMailId.length > 0 && (
+                      <span className="error">{errors.cgMailId}</span>
+                    )}
                   </div>
                   <div className="form-group">
                     <label for="region">Region: </label>
@@ -445,7 +457,8 @@ class AddPersonal extends Component {
                       name="region"
                       value={this.state.region}
                       onChange={this.changeRegionHandler}
-                      required>
+                      required
+                    >
                       <option value="">-Select Option-</option>
                       <option value="IN">IN</option>
                       <option value="SG">SG</option>
@@ -459,7 +472,8 @@ class AddPersonal extends Component {
                       name="practice"
                       value={this.state.practice}
                       onChange={this.changePracticeHandler}
-                      required>
+                      required
+                    >
                       <option value="">-Select Option-</option>
                       <option value="BCM-CEN">BCM-CEN</option>
                       <option value="GP-INS-GW">GP-INS-GW</option>
@@ -609,7 +623,8 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.designation}
                       onChange={this.changeDesignationHandler}
-                      required/>
+                      required
+                    />
                   </div>
                   <div className="form-group">
                     <label>CG-Supervisor: </label>
@@ -620,7 +635,8 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgSupervisor}
                       onChange={this.changeCgSupervisorHandler}
-                      required/>
+                      required
+                    />
                   </div>
                   <div className="form-group">
                     <label>CG-DBS account-supervisor: </label>
@@ -631,7 +647,8 @@ class AddPersonal extends Component {
                       className="form-control"
                       value={this.state.cgDBSAccountSupervisor}
                       onChange={this.changeCgDBSAccountSupervisorHandler}
-                      required/>
+                      required
+                    />
                   </div>
                   <div className="form-group">
                     <label>DBS Client Lead: </label>
@@ -737,6 +754,19 @@ class AddPersonal extends Component {
                       required
                     />
                   </div>
+
+                  <div className="form-group">
+                    <label>Date of Joining of Capgemini Company: </label>
+                    <input
+                      type="date"
+                      name="dateOfJoiningCGCompany"
+                      className="form-control"
+                      value={this.state.dateOfJoiningCGCompany}
+                      onChange={this.changeDateOfJoiningCGCompanyHandler}
+                      required
+                    />
+                  </div>
+
                   <div className="form-group">
                     <label>Billabale start date: </label>
                     <input
@@ -769,8 +799,9 @@ class AddPersonal extends Component {
                       onChange={this.changeDbsMailIdHandler}
                       required
                     />
-                    {errors.dbsMailId.length > 0 && 
-                    <span className='error'>{errors.dbsMailId}</span>}
+                    {errors.dbsMailId.length > 0 && (
+                      <span className="error">{errors.dbsMailId}</span>
+                    )}
                   </div>
                   <div className="form-group">
                     <label>Primary skill: </label>
@@ -785,7 +816,7 @@ class AddPersonal extends Component {
                   </div>
                   <div className="form-group">
                     <label>
-                      Overall Experience before joining CG in months:{" "}
+                      Overall Experience before joining CG in months:
                     </label>
                     <input
                       type="number"
@@ -795,9 +826,25 @@ class AddPersonal extends Component {
                       onChange={
                         this.changeOverallExperienceBeforeJoiningCgHandler
                       }
-                      required
                     />
                   </div>
+
+                  {/* <div className="form-group">
+                    <label>
+                      Total Experience
+                    </label>
+                    <input
+                      type="number"
+                      name="totalExperience"
+                      className="form-control"
+                      value={this.state.totalExperience}
+                      onChange={
+                        this.changeTotalExperienceHandler
+                      }
+                      required
+                    />
+                  </div> */}
+
                   <div className="form-group">
                     <label>SOW Number/Beeline Assignment Id: </label>
                     <input
@@ -844,8 +891,9 @@ class AddPersonal extends Component {
                       onChange={this.changePanCardHandler}
                       required
                     />
-                     {errors.panCard.length > 0 && 
-                    <span className='error'>{errors.panCard}</span>}
+                    {errors.panCard.length > 0 && (
+                      <span className="error">{errors.panCard}</span>
+                    )}
                   </div>
                   <div className="form-group">
                     <label>Passport: </label>
@@ -858,8 +906,9 @@ class AddPersonal extends Component {
                       onChange={this.changePassportHandler}
                       required
                     />
-                    {errors.passport.length > 0 && 
-                    <span className='error'>{errors.passport}</span>}
+                    {errors.passport.length > 0 && (
+                      <span className="error">{errors.passport}</span>
+                    )}
                   </div>
                   <div className="form-group">
                     <label>Passport Expiry Date: </label>

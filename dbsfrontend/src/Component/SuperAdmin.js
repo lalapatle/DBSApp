@@ -3,7 +3,6 @@ import EmployeeService from "../Services/EmployeeService";
 import "../App.css";
 import SearchIcon from "@material-ui/icons/Search";
 
-
 class SuperAdmin extends Component {
   constructor(props) {
     super(props);
@@ -15,11 +14,10 @@ class SuperAdmin extends Component {
     this.editEmployee = this.editEmployee.bind(this);
     this.changeback = this.changeback.bind(this);
     this.generateReport = this.generateReport.bind(this);
-    this.SearchChange=this.SearchChange.bind(this);
-
+    this.SearchChange = this.SearchChange.bind(this);
   }
 
-  SearchChange= (e) => {
+  SearchChange = (e) => {
     this.setState({
       cgGroupId: e.target.value,
     });
@@ -27,9 +25,7 @@ class SuperAdmin extends Component {
 
   searchAssociate = (e) => {
     e.preventDefault();
-    this.props.history.push(
-      `/search-by-cgGroupId/${this.state.cgGroupId}`
-    );
+    this.props.history.push(`/search-by-cgGroupId/${this.state.cgGroupId}`);
   };
 
   generateReport() {
@@ -53,18 +49,18 @@ class SuperAdmin extends Component {
     this.props.history.push(`/view-superadmin/${sno}`);
   }
   changeback() {
-    this.props.history.push(`/`);
+    this.props.history.push(`/login`);
   }
 
-  deleteEmployee(sno){
-      EmployeeService.deleteAssociate(sno).then((res)=>{
-        this.setState({
-          employees: this.state.employees.filter(
-            (employee)=> employee.sno !== sno
-          ),
-        });
-        alert('Deleted record successfully!');
+  deleteEmployee(sno) {
+    EmployeeService.deleteAssociate(sno).then((res) => {
+      this.setState({
+        employees: this.state.employees.filter(
+          (employee) => employee.sno !== sno
+        ),
       });
+      alert("Deleted record successfully!");
+    });
   }
 
   render() {
@@ -72,18 +68,18 @@ class SuperAdmin extends Component {
       <div className="container">
         <h2 className="text-center headingtitle">Super Admin</h2>
         <div className="row header">
-        <div className="left-div">
-          <button id="margin" onClick={this.addEmployee} class="button">
-            Add
-          </button>
-          <button
-            id="margin"
-            style={{ marginLeft: "45px" }}
-            onClick={() => this.changeback()}
-            class="button"
-          >
-            Back
-          </button>
+          <div className="left-div">
+            <button id="margin" onClick={this.addEmployee} class="button">
+              Add
+            </button>
+            <button
+              id="margin"
+              style={{ marginLeft: "45px" }}
+              onClick={() => this.changeback()}
+              class="button"
+            >
+              Back
+            </button>
           </div>
           <div className="right-div">
             <div className="input-group searchBar">
@@ -99,11 +95,11 @@ class SuperAdmin extends Component {
                   type="button"
                   onClick={this.searchAssociate}
                 >
-                <SearchIcon/>
+                  <SearchIcon />
                 </button>
               </div>
+            </div>
           </div>
-        </div>
         </div>
         <br></br>
         <div className="row">
