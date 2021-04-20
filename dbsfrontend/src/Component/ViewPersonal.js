@@ -136,7 +136,7 @@ class ViewPersonal extends Component {
 
             <div className="row">
               <label>Mandatory Training:</label>&nbsp;&nbsp;
-              <div> {this.state.employe.mandotoryTraining}</div>
+              <div> {this.state.employe.mandatoryTraining}</div>
             </div>
 
             <div className="row">
@@ -146,12 +146,22 @@ class ViewPersonal extends Component {
 
             <div className="row">
               <label>Pancard:</label>&nbsp;&nbsp;
-              <div> {this.state.employe.panCard}</div>
+              <div> {this.state.employe.panCard}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a
+                href={`http://localhost:8080/dbsoApp/file/download-pancard/${this.state.employe.cgGroupId}`}
+              >
+                {this.state.employe.fileName}
+              </a>
             </div>
 
             <div className="row">
               <label>Passport:</label>&nbsp;&nbsp;
-              <div> {this.state.employe.passport}</div>
+              <div> {this.state.employe.passport}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a
+                href={`http://localhost:8080/dbsoApp/file1/download1/${this.state.employe.cgGroupId}`}
+              >
+                {this.state.employe.fileName1}
+              </a>
             </div>
 
             <div className="row">
@@ -216,6 +226,14 @@ class ViewPersonal extends Component {
             <div className="row">
               <label>Spoc to whom laptop wasReturned:</label>&nbsp;&nbsp;
               <div> {this.state.employe.spoc}</div>
+            </div>
+            <div className="row">
+              <label>Cv Resume :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a
+                href={`http://localhost:8080/dbsoApp/cvr/downloadCv/${this.state.employe.cgGroupId}`}
+              >
+                {this.state.employe.cvresume}
+              </a>
             </div>
 
             <button className="button cancel" onClick={this.cancel.bind(this)}>

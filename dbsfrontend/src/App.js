@@ -21,7 +21,9 @@ import Login from "./Component/Login";
 import ForgetPassword from "./Component/ForgetPassword";
 import AssociatePortal from "./Component/AssociatePortal";
 import Profile from "./Component/Profile";
-
+import UploadPancardFiles from "./Component/UploadPancardFiles";
+import UploadPassportFiles from "./Component/UploadPassportFiles";
+import UploadCvFiles from "./Component/UploadCvFiles";
 function App() {
   return (
     <Router>
@@ -53,6 +55,15 @@ function App() {
             path="/search-by-cgGroupId/:cgGroupId"
             component={SearchByCgGroupId}
           />
+          <Route
+            path="/upload-pancard/:cgGroupId"
+            component={UploadPancardFiles}
+          />
+          <Route
+            path="/upload-passport/:cgGroupId"
+            component={UploadPassportFiles}
+          />
+          <Route path="/upload-cvr/:cgGroupId" component={UploadCvFiles} />
         </Switch>
         <Footer />
       </>
