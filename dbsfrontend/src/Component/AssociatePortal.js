@@ -12,6 +12,9 @@ class AssociatePortal extends Component {
     this.editPersonal = this.editPersonal.bind(this);
     this.addPersonal = this.addPersonal.bind(this);
     this.changeback = this.changeback.bind(this);
+    this.uploadFile = this.uploadFile.bind(this);
+    this.uploadFile1 = this.uploadFile1.bind(this);
+    this.uploadCv = this.uploadCv.bind(this);
   }
   componentDidMount() {
     PersonalService.getById(this.state.cgGroupId).then((response) => {
@@ -35,6 +38,18 @@ class AssociatePortal extends Component {
   changeback() {
     this.props.history.push(`/login`);
   }
+  uploadFile(cgGroupId) {
+    this.props.history.push(`/upload-pancard/${cgGroupId}`);
+  }
+
+  uploadFile1(cgGroupId) {
+    this.props.history.push(`/upload-passport/${cgGroupId}`);
+  }
+
+  uploadCv(cgGroupId) {
+    this.props.history.push(`/upload-cvr/${cgGroupId}`);
+  }
+
   render() {
     return (
       <div className="container">
@@ -111,7 +126,8 @@ class AssociatePortal extends Component {
                 <th>date of laptop taken</th>
                 <th>date of laptop return</th>
                 <th>Spoc</th>
-                <th colSpan="2" style={{ textAlign: "center" }}>
+                <th>Resume </th>
+                <th colSpan="3" style={{ textAlign: "center" }}>
                   Actions
                 </th>
               </tr>
@@ -144,8 +160,44 @@ class AssociatePortal extends Component {
               <td>{this.state.employee.sowNumber}</td>
               <td>{this.state.employee.mandatoryTraining}</td>
               <td>{this.state.employee.onboardingDocs}</td>
-              <td>{this.state.employee.panCard}</td>
-              <td>{this.state.employee.passport}</td>
+              <td>
+                {this.state.employee.panCard}
+                <button
+                  id="margin"
+                  onClick={() => this.uploadFile(this.state.employee.cgGroupId)}
+                  className="uploadbtn"
+                >
+                  Upload
+                </button>
+                <br></br>
+                <td>
+                  <a
+                    href={`http://localhost:8080/dbsoApp/file/download-pancard/${this.state.employee.cgGroupId}`}
+                  >
+                    {this.state.employee.fileName}
+                  </a>
+                </td>
+              </td>
+
+              <td>
+                {this.state.employee.passport}
+                <button
+                  id="margin"
+                  onClick={() =>
+                    this.uploadFile1(this.state.employee.cgGroupId)
+                  }
+                  className="uploadbtn"
+                >
+                  Upload
+                </button>
+                <td>
+                  <a
+                    href={`http://localhost:8080/dbsoApp/file1/download1/${this.state.employee.cgGroupId}`}
+                  >
+                    {this.state.employee.fileName1}
+                  </a>
+                </td>
+              </td>
               <td>{this.state.employee.passportExpiryDate}</td>
               <td>{this.state.employee.dateOfBirth}</td>
               <td>{this.state.employee.foreignEmploymentExperience}</td>
@@ -159,6 +211,13 @@ class AssociatePortal extends Component {
               <td>{this.state.employee.dateOfLaptopTaken}</td>
               <td>{this.state.employee.dateOfLaptopReturn}</td>
               <td>{this.state.employee.spoc}</td>
+              <td>
+                <a
+                  href={`http://localhost:8080/dbsoApp/cvr/downloadCv/${this.state.employee.cgGroupId}`}
+                >
+                  {this.state.employee.cvresume}
+                </a>
+              </td>
               <td>
                 <div className="actions">
                   <button
@@ -184,6 +243,16 @@ class AssociatePortal extends Component {
                     View
                   </button>
                 </div>
+              </td>
+              <td>
+                <button
+                  id="margin"
+                  onClick={() => this.uploadCv(this.state.employee.cgGroupId)}
+                  className="button"
+                  style={{ width: "200px" }}
+                >
+                  Upload Resume
+                </button>
               </td>
             </tbody>
           </table>

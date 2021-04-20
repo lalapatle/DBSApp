@@ -195,7 +195,7 @@ class ViewEmployee extends Component {
 
               <div className="row">
                 <label>Mandatory Training:</label>&nbsp;&nbsp;
-                <div> {this.state.emp.associatePersonal.mandotoryTraining}</div>
+                <div> {this.state.emp.associatePersonal.mandatoryTraining}</div>
               </div>
 
               <div className="row">
@@ -206,11 +206,23 @@ class ViewEmployee extends Component {
               <div className="row">
                 <label>Pancard:</label>&nbsp;&nbsp;
                 <div> {this.state.emp.associatePersonal.panCard}</div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a
+                  href={`http://localhost:8080/dbsoApp/file/download-pancard/${this.state.emp.associatePersonal.cgGroupId}`}
+                >
+                  {this.state.emp.associatePersonal.fileName}
+                </a>
               </div>
 
               <div className="row">
                 <label>Passport:</label>&nbsp;&nbsp;
                 <div> {this.state.emp.associatePersonal.passport}</div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a
+                  href={`http://localhost:8080/dbsoApp/file1/download1/${this.state.emp.associatePersonal.cgGroupId}`}
+                >
+                  {this.state.emp.associatePersonal.fileName1}
+                </a>
               </div>
 
               <div className="row">
@@ -284,7 +296,14 @@ class ViewEmployee extends Component {
                 <label>Spoc to whom laptop wasReturned:</label>&nbsp;&nbsp;
                 <div> {this.state.emp.associatePersonal.spoc}</div>
               </div>
-
+              <div className="row">
+                <label>Cv Resume :</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a
+                  href={`http://localhost:8080/dbsoApp/cvr/downloadCv/${this.state.emp.associatePersonal.cgGroupId}`}
+                >
+                  {this.state.emp.associatePersonal.cvresume}
+                </a>
+              </div>
               <button
                 className="button cancel"
                 onClick={this.cancel.bind(this)}

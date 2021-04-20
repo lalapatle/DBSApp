@@ -20,6 +20,17 @@ class PersonalService {
   updatePersonal(personal, cgGroupId) {
     return axios.put(PERSONAL_API_BASE_URL + "/update/" + cgGroupId, personal);
   }
+  uploadFile(cgGroupId) {
+    return axios.put(PERSONAL_API_BASE_URL + "/upload-pancard/" + cgGroupId);
+  }
+
+  uploadFile1(cgGroupId) {
+    return axios.put(PERSONAL_API_BASE_URL + "/uploadfile1/" + cgGroupId);
+  }
+
+  uploadCv(cgGroupId) {
+    return axios.put(PERSONAL_API_BASE_URL + "/upload-cv/" + cgGroupId);
+  }
 }
 
 export default new PersonalService();

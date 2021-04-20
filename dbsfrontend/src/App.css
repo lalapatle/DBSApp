@@ -188,3 +188,24 @@ button.btn.searchButton {
 input.form-control.searchInput {
   height: 50px;
 }
+.uploadbtn {
+  padding: 5px 10px;
+  /* font-size: 20px; */
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #012a4a;
+  border: none;
+  border-radius: 10px;
+  /* box-shadow: 0 9px #999; */
+  width: -webkit-fill-available;
+  margin-top: 10px;
+}
+a.tabledata {
+  background-color: aliceblue;
+  /* width: 50px !important; */
+  display: block;
+  width: 70px;
+  height: 71px;
+}
