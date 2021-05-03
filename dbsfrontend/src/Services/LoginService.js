@@ -13,7 +13,6 @@ class LoginService {
   resetPassword(login) {
     return axios.post(BASE_URL + "reset", login);
   }
-  reset;
 }
 
 export default new LoginService();
